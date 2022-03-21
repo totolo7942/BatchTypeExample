@@ -2,6 +2,7 @@ plugins {
 	id 'org.springframework.boot' version '2.6.4'
 	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
 	id 'java'
+	id 'groovy'
 }
 
 group = 'com.example'
@@ -16,6 +17,7 @@ configurations {
 
 repositories {
 	mavenCentral()
+	mavenLocal()
 }
 
 dependencies {
@@ -25,6 +27,21 @@ dependencies {
 	annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
 	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+	// mandatory dependencies for using Spock
+	implementation 'org.codehaus.groovy:groovy:3.0.10'
+	testImplementation platform("org.spockframework:spock-bom:2.1-groovy-3.0")
+	testImplementation "org.spockframework:spock-core"
+	testImplementation "org.spockframework:spock-junit4"  // you can remove this if your code does not rely on old JUnit 4 rules
+
+	// optional dependencies for using Spock
+	testImplementation "org.hamcrest:hamcrest-core:2.2"   // only necessary if Hamcrest matchers are used
+	testRuntimeOnly 'net.bytebuddy:byte-buddy:1.12.8' // allows mocking of classes (in addition to interfaces)
+	testRuntimeOnly "org.objenesis:objenesis:3.2"      // allows mocking of classes without default constructor (together with ByteBuddy or CGLIB)
+
+	// dependencies used by examples in this project
+	testRuntimeOnly "com.h2database:h2:2.1.210"
+	implementation "org.codehaus.groovy:groovy-sql:3.0.9"
 }
 
 tasks.named('test') {
