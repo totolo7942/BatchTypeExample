@@ -1,3 +1,4 @@
 rootProject.name = 'BatchTypeExample'
 include 'batch-jobs'
+include 'batch-quartz'
 

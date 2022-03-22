@@ -65,6 +65,7 @@ subprojects {
 
 dependencies {
 	implementation project(':batch-jobs')
+	implementation project(':batch-quartz')
 
 	testImplementation "org.spockframework:spock-core"
 	testImplementation "org.spockframework:spock-junit4"  // you can remove this if your code does not rely on old JUnit 4 rules

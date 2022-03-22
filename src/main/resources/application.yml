@@ -1,0 +1,18 @@
+spring:
+    quartz:
+        job-store-type: memory
+        wait-for-jobs-to-complete-on-shutdown: true
+        properties:
+            org:
+                quartz:
+                    scheduler:
+                        skipUpdateCheck: true
+                threadPool:
+                    class: org.quartz.simpl.SimpleThreadPool
+                    threadCount: 5
+                jobStore:
+                    class: org.quartz.simpl.RAMJobStore
+                plugin:
+                    shutdownhook:
+                        class: org.quartz.plugins.management.ShutdownHookPlugin
+                        cleanShutdown: true
