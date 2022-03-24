@@ -2,6 +2,8 @@ package com.example.batchtypeexample.dto;
 
 import lombok.Data;
 import org.hibernate.validator.constraints.NotBlank;
+import org.quartz.JobDataMap;
+import org.quartz.Trigger;
 
 import java.sql.Date;
 import java.time.LocalDateTime;
@@ -14,9 +16,6 @@ import static org.quartz.SimpleScheduleBuilder.simpleSchedule;
 import static org.quartz.TriggerBuilder.newTrigger;
 import static org.springframework.scheduling.support.CronExpression.isValidExpression;
 import static org.springframework.util.ObjectUtils.isEmpty;
-
-import org.quartz.JobDataMap;
-import org.quartz.Trigger;
 
 @Data
 public class TriggerDescriptor {
@@ -50,13 +49,7 @@ public class TriggerDescriptor {
         return isEmpty(name) ? randomUUID().toString() : name;
     }
 
-    /**
-     * Convenience method for building a Trigger
-     *
-     * @return the Trigger associated with this descriptor
-     */
     public Trigger buildTrigger() {
-        // @formatter:off
         if (!isEmpty(cron)) {
             if (!isValidExpression(cron))
                 throw new IllegalArgumentException("Provided expression " + cron + " is not a valid cron expression");
@@ -80,23 +73,15 @@ public class TriggerDescriptor {
                     .usingJobData(jobDataMap)
                     .build();
         }
-        // @formatter:on
+
         throw new IllegalStateException("unsupported trigger descriptor " + this);
     }
 
-    /**
-     *
-     * @param trigger
-     *            the Trigger used to build this descriptor
-     * @return the TriggerDescriptor
-     */
     public static TriggerDescriptor buildDescriptor(Trigger trigger) {
-        // @formatter:off
         return new TriggerDescriptor()
                 .setName(trigger.getKey().getName())
                 .setGroup(trigger.getKey().getGroup())
                 .setFireTime((LocalDateTime) trigger.getJobDataMap().get("fireTime"))
                 .setCron(trigger.getJobDataMap().getString("cron"));
-        // @formatter:on
     }
 }

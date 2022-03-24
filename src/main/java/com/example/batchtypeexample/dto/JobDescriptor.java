@@ -40,11 +40,6 @@ public class JobDescriptor {
         return this;
     }
 
-    /**
-     * Convenience method for building Triggers of Job
-     *
-     * @return Triggers for this JobDetail
-     */
     @JsonIgnore
     public Set<Trigger> buildTriggers() {
         Set<Trigger> triggers = new LinkedHashSet<>();
@@ -55,11 +50,6 @@ public class JobDescriptor {
         return triggers;
     }
 
-    /**
-     * Convenience method that builds a JobDetail
-     *
-     * @return the JobDetail built from this descriptor
-     */
     public JobDetail buildJobDetail() {
         JobDataMap jobDataMap = new JobDataMap();
         return newJob(SampleExecutorJob.class)
@@ -68,18 +58,8 @@ public class JobDescriptor {
                 .build();
     }
 
-    /**
-     * Convenience method that builds a descriptor from JobDetail and Trigger(s)
-     *
-     * @param jobDetail
-     *            the JobDetail instance
-     * @param triggersOfJob
-     *            the Trigger(s) to associate with the Job
-     * @return the JobDescriptor
-     */
     @SuppressWarnings("unchecked")
     public static JobDescriptor buildDescriptor(JobDetail jobDetail, List<? extends Trigger> triggersOfJob) {
-        // @formatter:off
         List<TriggerDescriptor> triggerDescriptors = new ArrayList<>();
 
         for (Trigger trigger : triggersOfJob) {
@@ -90,6 +70,5 @@ public class JobDescriptor {
                 .setName(jobDetail.getKey().getName())
                 .setGroup(jobDetail.getKey().getGroup())
                 .setTriggerDescriptors(triggerDescriptors);
-        // @formatter:on
     }
 }
