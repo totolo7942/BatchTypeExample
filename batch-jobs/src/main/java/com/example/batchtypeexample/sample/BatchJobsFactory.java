@@ -11,6 +11,10 @@ import org.springframework.context.ApplicationContextAware;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.stereotype.Component;
 
+import java.util.Random;
+
+import static java.util.UUID.randomUUID;
+
 @EnableScheduling
 @Component
 public class BatchJobsFactory implements ApplicationContextAware {
@@ -19,6 +23,7 @@ public class BatchJobsFactory implements ApplicationContextAware {
 
     public Job getBatchJob(final String beanName, JobLauncher launcher){
         JobParametersBuilder jobParametersbuilder = new JobParametersBuilder();
+        jobParametersbuilder.addString("key", String.valueOf(randomUUID()));
         JobParameters jobParameters = jobParametersbuilder.toJobParameters();
 
         Job job = (Job) applicationContext.getBean("fooJob");

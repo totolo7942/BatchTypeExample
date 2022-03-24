@@ -1,0 +1,34 @@
+
+### create job
+POST http://localhost:9090/api/v1.0/groups/test/jobs
+Content-Type: application/json
+
+{
+  "name": "job1",
+  "subject": "sample cron tab",
+  "triggers":
+  [
+    {
+      "name": "job1-trigger",
+      "cron": "0/5 * * * * ?"
+    }
+  ]
+}
+
+
+### list
+GET http://localhost:9090/api/v1.0/groups/test/jobs/job1
+Content-Type: application/json
+
+
+### delete
+DELETE http://localhost:9090/api/v1.0/groups/test/jobs/job1
+Content-Type: application/json
+
+### resume
+PATCH http://localhost:9090/api/v1.0/groups/test/jobs/job1/resume
+Content-Type: application/json
+
+### pause
+PATCH http://localhost:9090/api/v1.0/groups/test/jobs/job1/pause
+Content-Type: application/json

@@ -7,8 +7,9 @@ import org.springframework.batch.core.launch.JobLauncher;
 import org.springframework.batch.core.repository.JobExecutionAlreadyRunningException;
 import org.springframework.batch.core.repository.JobInstanceAlreadyCompleteException;
 import org.springframework.batch.core.repository.JobRestartException;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
+
+import static java.util.UUID.randomUUID;
 
 @Component
 @Slf4j
@@ -22,11 +23,12 @@ public class HelloScheduler {
         this.batchJobsFactory = batchJobsFactory;
     }
 
-    @Scheduled(cron="*/3 * * * * ?")
+//    @Scheduled(cron="*/3 * * * * ?")
     public void executor() {
 
         Job job = batchJobsFactory.getBatchJob("fooJob", launcher);
         JobParametersBuilder jobParametersBuilder = new JobParametersBuilder();
+        jobParametersBuilder.addString("key", String.valueOf(randomUUID()));
         JobParameters parameters = jobParametersBuilder.toJobParameters();
         JobExecution jobExecution = null;
         try {

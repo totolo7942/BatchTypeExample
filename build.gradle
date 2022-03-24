@@ -67,9 +67,24 @@ dependencies {
 	implementation project(':batch-jobs')
 	implementation project(':batch-quartz')
 
+	implementation "org.codehaus.groovy:groovy-sql:3.0.9"
+
+	implementation 'org.slf4j:slf4j-api'
+	implementation 'org.apache.logging.log4j:log4j-api'
+	implementation 'org.apache.logging.log4j:log4j-core'
+	implementation 'ch.qos.logback:logback-classic:1.2.6'
+	implementation 'org.bgee.log4jdbc-log4j2:log4jdbc-log4j2-jdbc4.1:1.16'
+	implementation 'org.springframework.boot:spring-boot-starter-logging'
+	implementation(platform("org.apache.logging.log4j:log4j-bom:2.17.1"))
+	implementation 'org.codehaus.groovy:groovy:3.0.10'
+	implementation 'org.hibernate.validator:hibernate-validator'
+
+
+	implementation 'org.quartz-scheduler:quartz'
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+
 	testImplementation "org.spockframework:spock-core"
 	testImplementation "org.spockframework:spock-junit4"  // you can remove this if your code does not rely on old JUnit 4 rules
-	implementation 'org.codehaus.groovy:groovy:3.0.10'
 	testImplementation platform("org.spockframework:spock-bom:2.1-groovy-3.0")
 
 	// optional dependencies for using Spock
@@ -81,16 +96,6 @@ dependencies {
 	testRuntimeOnly "com.h2database:h2:2.1.210"
 	testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
 	testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
-	implementation "org.codehaus.groovy:groovy-sql:3.0.9"
-
-
-	implementation 'org.slf4j:slf4j-api'
-	implementation 'org.apache.logging.log4j:log4j-api'
-	implementation 'org.apache.logging.log4j:log4j-core'
-	implementation 'ch.qos.logback:logback-classic:1.2.6'
-	implementation 'org.bgee.log4jdbc-log4j2:log4jdbc-log4j2-jdbc4.1:1.16'
-	implementation 'org.springframework.boot:spring-boot-starter-logging'
-	implementation(platform("org.apache.logging.log4j:log4j-bom:2.17.1"))
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
 
