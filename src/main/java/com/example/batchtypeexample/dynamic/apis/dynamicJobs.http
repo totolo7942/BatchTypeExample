@@ -32,3 +32,8 @@ Content-Type: application/json
 ### pause
 PATCH http://localhost:9090/api/v1.0/groups/test/jobs/job1/pause
 Content-Type: application/json
+
+
+### all jobs
+GET http://localhost:9090/api/v1.0/groups/test/jobs/all
+Content-Type: application/json

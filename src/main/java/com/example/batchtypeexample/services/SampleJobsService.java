@@ -4,11 +4,11 @@ import com.example.batchtypeexample.dto.JobDescriptor;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.quartz.*;
+import org.quartz.impl.StdSchedulerFactory;
+import org.quartz.impl.matchers.GroupMatcher;
 import org.springframework.stereotype.Service;
 
-import java.util.Objects;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 
 import static org.quartz.JobKey.jobKey;
 
@@ -92,6 +92,24 @@ public class SampleJobsService {
             log.info("Resumed job with key - {}.{}", group, name);
         } catch (SchedulerException e) {
             log.error("Could not resume job with key - {}.{} due to error - {}", group, name, e.getLocalizedMessage());
+        }
+    }
+
+    public void findByAllJobs() throws SchedulerException {
+        for (String groupName : scheduler.getJobGroupNames()) {
+
+            for (JobKey jobKey : scheduler.getJobKeys(GroupMatcher.jobGroupEquals(groupName))) {
+                String jobName = jobKey.getName();
+                String jobGroup = jobKey.getGroup();
+
+                //get job's trigger
+                List<Trigger> triggers = (List<Trigger>) scheduler.getTriggersOfJob(jobKey);
+                Date nextFireTime = triggers.get(0).getNextFireTime();
+
+                log.info("[jobName] :  {}  [groupName] : {}) - {} ",  jobName, jobGroup, triggers.toString());
+
+            }
+
         }
     }
 
