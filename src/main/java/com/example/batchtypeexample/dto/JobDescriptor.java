@@ -1,6 +1,6 @@
 package com.example.batchtypeexample.dto;
 
-import com.example.batchtypeexample.job.EmailJob;
+import com.example.batchtypeexample.job.SampleExecutorJob;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
@@ -62,7 +62,7 @@ public class JobDescriptor {
      */
     public JobDetail buildJobDetail() {
         JobDataMap jobDataMap = new JobDataMap();
-        return newJob(EmailJob.class)
+        return newJob(SampleExecutorJob.class)
                 .withIdentity(getName(), getGroup())
                 .usingJobData(jobDataMap)
                 .build();

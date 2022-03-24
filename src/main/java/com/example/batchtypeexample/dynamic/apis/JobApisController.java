@@ -1,9 +1,8 @@
 package com.example.batchtypeexample.dynamic.apis;
 
 import com.example.batchtypeexample.dto.JobDescriptor;
-import com.example.batchtypeexample.services.EmailService;
+import com.example.batchtypeexample.services.SampleJobsService;
 import lombok.RequiredArgsConstructor;
-import org.quartz.SchedulerException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,9 +11,9 @@ import static org.springframework.http.HttpStatus.CREATED;
 @RestController
 @RequestMapping("/api/v1.0")
 @RequiredArgsConstructor
-public class ApisController {
+public class JobApisController {
 
-    private final EmailService emailService;
+    private final SampleJobsService emailService;
 
     @PostMapping(path = "/groups/{group}/jobs")
     public ResponseEntity<JobDescriptor> createJob(@PathVariable String group, @RequestBody JobDescriptor descriptor) {

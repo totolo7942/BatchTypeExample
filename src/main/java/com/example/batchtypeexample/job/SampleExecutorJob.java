@@ -7,18 +7,18 @@ import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
 
 @Slf4j
-public class EmailJob implements Job {
+public class SampleExecutorJob implements Job {
 
     @Override
     public void execute(JobExecutionContext context) throws JobExecutionException {
         log.info("Job triggered to send emails");
         JobDataMap map = context.getMergedJobDataMap();
-        sendEmail(map);
+        executor(map);
         log.info("Job completed");
     }
 
     @SuppressWarnings("unchecked")
-    private void sendEmail(JobDataMap map) {
+    private void executor(JobDataMap map) {
         log.info(">#################### send email");
     }
 }

@@ -4,18 +4,18 @@ import com.example.batchtypeexample.dto.JobDescriptor;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.quartz.*;
-import org.quartz.impl.StdSchedulerFactory;
-import org.quartz.impl.matchers.GroupMatcher;
 import org.springframework.stereotype.Service;
 
-import java.util.*;
+import java.util.Objects;
+import java.util.Optional;
+import java.util.Set;
 
 import static org.quartz.JobKey.jobKey;
 
 @Slf4j
 @Service
 @RequiredArgsConstructor
-public class EmailService {
+public class SampleJobsService {
 
     private final Scheduler scheduler;
 
