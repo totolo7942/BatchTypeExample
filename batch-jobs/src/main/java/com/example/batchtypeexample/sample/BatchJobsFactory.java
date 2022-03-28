@@ -11,8 +11,6 @@ import org.springframework.context.ApplicationContextAware;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.stereotype.Component;
 
-import java.util.Random;
-
 import static java.util.UUID.randomUUID;
 
 @EnableScheduling

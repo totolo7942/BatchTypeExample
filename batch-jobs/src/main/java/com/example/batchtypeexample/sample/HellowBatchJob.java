@@ -20,7 +20,6 @@ public class HellowBatchJob {
 
     @Bean
     public Job fooJob() {
-        System.out.println("fooJob 메서드 실행");
         return jobBuilderFactory.get("myFooJob") // 일억성이 되는 임의 잡 이름을 지정
                 .flow(helloStep()) // 실행하는 Step을 지정
                 .end()
@@ -29,7 +28,6 @@ public class HellowBatchJob {
 
     @Bean
     public Job barJob() {
-        System.out.println("barJob 메서드 실행");
         return jobBuilderFactory.get("myBarJob") // 일억성이 되는 임의 잡 이름을 지정
                 .flow(helloStep()) // 실행하는 Step을 지정
                 .next(worldStep()) // 실행하는 Step을 지정
@@ -39,7 +37,6 @@ public class HellowBatchJob {
 
     @Bean
     public Step helloStep() {
-        System.out.println("helloStep 메서드 실행");
         return stepBuilderFactory.get("myHelloStep") // 임의의 스탭 이름을 지정
                 .tasklet(new MessageTasklet("Hello!")) // 실행하는 Tasklet을 지정
                 .build();
@@ -47,7 +44,6 @@ public class HellowBatchJob {
 
     @Bean
     public Step worldStep() {
-        System.out.println("worldStep 메서드를 실행");
         return stepBuilderFactory.get("myWorldStep") // 임의의 스탭 이름을 지정
                 .tasklet(new MessageTasklet("World!")) // 실행하는 Tasklet을 지정
                 .build();
