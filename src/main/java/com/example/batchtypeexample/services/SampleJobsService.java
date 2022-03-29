@@ -3,6 +3,7 @@ package com.example.batchtypeexample.services;
 import com.example.batchtypeexample.dto.JobDescriptor;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.openjdk.jol.info.ClassLayout;
 import org.quartz.*;
 import org.quartz.impl.StdSchedulerFactory;
 import org.quartz.impl.matchers.GroupMatcher;
@@ -106,7 +107,7 @@ public class SampleJobsService {
                 List<Trigger> triggers = (List<Trigger>) scheduler.getTriggersOfJob(jobKey);
                 Date nextFireTime = triggers.get(0).getNextFireTime();
 
-                log.info("[jobName] :  {}  [groupName] : {}) - {} ",  jobName, jobGroup, triggers.toString());
+                log.info("[jobName] :  {}  [groupName] : {}) - {} ",  jobName, jobGroup, triggers);
 
             }
 
