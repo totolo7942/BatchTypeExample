@@ -2,6 +2,7 @@ import org.apache.commons.validator.routines.UrlValidator
 import org.openjdk.jol.info.ClassLayout
 import org.openjdk.jol.info.GraphLayout
 import org.springframework.web.client.HttpClientErrorException
+import spock.lang.IgnoreIf
 import spock.lang.Specification
 import spock.lang.Unroll
 
@@ -63,6 +64,7 @@ class HelloSpockSpec extends Specification {
         }
     }
 
+
     @Unroll //반복구문에서 fail일 경우 리포팅을 제대로 해줌, 단일은 효과 없음
     def "URL을 정규표현식으로 분리하자"(){
 
@@ -83,6 +85,7 @@ class HelloSpockSpec extends Specification {
         "https://www.11st.co.kr" | _(underline : ignored)
     }
 
+    @IgnoreIf({ os.windows })
     def "URL을 사용하여 간단하게 domain을 분리하자" (){
         given:
         def url ="https://www.11st.co.kr/test"
@@ -99,3 +102,5 @@ class HelloSpockSpec extends Specification {
     }
 
 }
+
+//TODO: spock Readme : https://spockframework.org/spock/docs/1.3/all_in_one.html#_mocking
